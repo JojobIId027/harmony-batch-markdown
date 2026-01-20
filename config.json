@@ -1,0 +1,15 @@
+{
+    "outputDir": "./output",
+    "urlMapping": {
+        "harmonyos-guides": "指南",
+        "harmonyos-references": "API参考",
+        "harmonyos-releases": "版本说明",
+        "best-practices": "最佳实践",
+        "harmonyos-faqs": "FAQ",
+        "architecture-guides": "行业实践"
+    },
+    "urls": [
+        "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ndk-embed-arkts-components",
+        "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-socket"
+    ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "harmony-batch-markdown",
+  "version": "1.0.0",
+  "main": "batch-puppeteer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "batch": "node batch-puppeteer.js"
+  },
+  "keywords": [],
+  "author": "jojobiid027",
+  "homepage": "https://github.com/JojobIId027/batch-markdown",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "markdownload": "^0.0.3",
+    "puppeteer": "^24.35.0",
+    "turndown": "^7.2.2",
+    "turndown-plugin-gfm": "^1.0.2"
+  }
+}
