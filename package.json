@@ -1,6 +1,6 @@
 {
   "name": "harmony-batch-markdown",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "batch-puppeteer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
