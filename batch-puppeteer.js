@@ -67,7 +67,7 @@ async function main() {
         try {
             console.log(`\n正在处理: ${url}`);
             await page.goto(url, { waitUntil: 'networkidle2', timeout: 90000 });
-            try { await page.waitForSelector('.doc-content, table', { timeout: 5000 }); } catch (e) { }
+            try { await page.waitForSelector('.doc-content, #article-content, article, .main-content, table', { timeout: 5000 }); } catch (e) { }
 
             // 2. 🔥 浏览器内执行：提取文件名 + 深度清洗
             const data = await page.evaluate((selectors) => {
@@ -135,7 +135,7 @@ async function main() {
                 });
 
                 // --- 4. 常规清理 ---
-                const useless = document.querySelectorAll('script, style, nav, header, footer, .side-menu, .bread-crumb, .toc, .feedback');
+                const useless = document.querySelectorAll('script, style, nav, header, footer, .side-menu, .bread-crumb, .toc, .feedback, .universal_header, .universal_footer, .dev-header, .dev-footer, #header, #footer, .header, .footer, .top-nav, .bottom-nav, .sidebar, .left-nav, .right-nav, .menu, #sidebar');
                 useless.forEach(el => el.remove());
 
                 // --- 5. 修复表格 ---
@@ -217,9 +217,14 @@ async function main() {
                 return {
                     breadcrumbs: breadcrumbList,
                     fallbackTitle: document.title,
-                    html: (contentEl || document.body).innerHTML
+                    html: contentEl ? contentEl.innerHTML : null
                 };
             }, CONTENT_SELECTORS);
+
+            if (!data.html) {
+                console.log(`⚠️  跳过: ${url} (未识别到正文容器，可能是目录或非文档页)`);
+                continue;
+            }
 
             // 3. 转换内容
             let markdown = turndownService.turndown(data.html);
