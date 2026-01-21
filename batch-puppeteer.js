@@ -161,6 +161,16 @@ async function main() {
                             parent.removeChild(list);
                         });
                         cell.innerHTML = cell.innerHTML.replace(/[\r\n]+/g, ' ');
+
+                        // 替换表格中的 | 为占位符，防止破坏 Markdown 表格结构
+                        const replacePipe = (node) => {
+                            if (node.nodeType === 3) { // Text node
+                                node.nodeValue = node.nodeValue.replace(/\|/g, 'SHELLPIPEMARKER');
+                            } else if (node.nodeType === 1) {
+                                node.childNodes.forEach(replacePipe);
+                            }
+                        };
+                        replacePipe(cell);
                     });
                 });
 
@@ -212,7 +222,9 @@ async function main() {
             }, CONTENT_SELECTORS);
 
             // 3. 转换内容
-            const markdown = turndownService.turndown(data.html);
+            let markdown = turndownService.turndown(data.html);
+            // 还原表格中的 | (转义后)
+            markdown = markdown.replace(/SHELLPIPEMARKER/g, '\\|');
 
             // 🆕 修改点：Node.js 端处理 URL 映射 + 文件夹自动创建
             let targetDir = OUTPUT_DIR;

@@ -9,7 +9,6 @@
         "architecture-guides": "行业实践"
     },
     "urls": [
-        "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ndk-embed-arkts-components",
-        "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-socket"
+        "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-animator"
     ]
 }
